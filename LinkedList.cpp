@@ -58,29 +58,37 @@ node* deleteElement(node* n, int value) {
 }
 
 node* swapElements(node* n, int a, int b) {
-    struct node *a_prev, *a_next,  *b_prev, *b_next, *temp, *head, *node_a, *node_b, *temp2;
-    head = n;
-    while(n != NULL && n->next != NULL) {
-        if(n->next->key == a) {
-            a_prev = n;
-            node_a = n->next;
-            a_next = node_a->next;
-        }
-        else if(n->next->key == b) {
-            b_prev = n;
-            node_b = n->next;
-            b_next = node_b->next;
-        }
-        n = n->next;
-    }
+    struct node *a_prev=NULL, *b_prev=NULL, *temp, *node_a=n, *node_b=n;
+    if(a==b) // if same values
+        return n;
 
-    temp = a_prev->next;
-    a_prev->next = node_b;
-    temp2 = node_b->next;
-    node_b->next = temp;
-    b_prev->next = temp2;
-    n = head;
-    return head;
+    while(node_a != NULL && node_a->key != a) { //find node a
+            a_prev = node_a;
+            node_a = node_a->next;
+    }
+    while(node_b != NULL && node_b->key != b) { //find node b
+            b_prev = node_b;
+            node_b = node_b->next;
+    }
+    
+    if(node_b == NULL || node_a == NULL) // If elements dont exist
+        return n;
+    
+    if(a_prev != NULL) // If node_a is not 1st element.
+        a_prev->next = node_b;
+    else
+        n = node_b;
+    
+    if(b_prev != NULL) // If node b is not 1st element.
+        b_prev->next = node_a;
+    else
+        n = node_a;
+    
+    temp = node_b->next;
+    node_b->next = node_a->next;
+    node_a->next = temp;
+
+    return n;
 }
 
 int main()
@@ -100,7 +108,7 @@ int main()
     head = temp;
     
     printlist(head);
-    head = swapElements(head,2,3);
+    head = swapElements(head,1,2);
     printlist(head);
     head = insertElement(head,4,6);
     printlist(head);
