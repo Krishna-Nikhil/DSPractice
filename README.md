@@ -4,4 +4,4 @@ LinkedList.cpp  - Insertion, Deletion & Swapping of nodes (without changing valu
 
 Queues_Stacks_Using_Arrays.cpp - Push and Pop in Queues and Stacks using arrays 
 
-Sorting.cpp - Insertion, Bubble, Selection sorts
+Sorting.cpp - Insertion, Bubble, Selection, Quick, Merge, Heap sorts
