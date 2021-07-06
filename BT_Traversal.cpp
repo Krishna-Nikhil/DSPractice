@@ -17,9 +17,7 @@ void printInorder(Node* root) {
         return;
     
     printInorder(root->left);
-    
     cout << root->data << " ";
-    
     printInorder(root->right);
 }
 
@@ -28,7 +26,6 @@ void printPreorder(Node* root) {
         return;
         
     cout << root->data << " ";
-    
     printPreorder(root->left);
     printPreorder(root->right);
 }
@@ -40,6 +37,26 @@ void printPostorder(Node* root) {
     printPostorder(root->left);
     printPostorder(root->right);
     cout << root->data << " ";
+}
+
+void printLevelorder(Node* root) {
+    if(root == NULL)
+        return;
+    
+    std::queue<Node*> q;
+    q.push(root);
+    
+    while(!q.empty()) {
+        Node* temp = q.front();
+        cout << temp->data << " ";
+        q.pop();
+        
+        if(temp->left)
+            q.push(temp->left);
+            
+        if(temp->right)
+            q.push(temp->right);
+    }
 }
 
 int main() {
@@ -70,6 +87,10 @@ int main() {
 
     cout << "Postorder: "; 
     printPostorder(node);
+    cout << endl;
+    
+    cout << "Levelorder: ";
+    printLevelorder(node);
     cout << endl;
 
     return 0;
